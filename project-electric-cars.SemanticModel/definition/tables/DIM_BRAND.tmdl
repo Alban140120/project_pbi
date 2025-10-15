@@ -1,0 +1,273 @@
+table DIM_BRAND
+	lineageTag: 2cdfea18-72a5-410b-9fa7-6f3f00f1792b
+
+	column brand_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f50b05cc-630d-4103-837f-5fca8caf1cb3
+		summarizeBy: none
+		sourceColumn: brand_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 92f6006e-18ba-4ce4-8265-9d7f965d3b3a
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 35ef770a-d237-4aa9-8884-fa1b00664632
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: eb58a484-4305-45c0-93a6-0eb7479bac1d
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Logo
+		dataType: string
+		lineageTag: 9e5ce4f5-0800-491f-858a-08325a0330bb
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Logo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag
+		dataType: string
+		lineageTag: 28a5dfb6-5a1c-4edd-b450-6e6fbfeb9b78
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_BRAND = m
+		mode: import
+		source = ```
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\alban.daniel_amaris\Documents\projet_perso\electric_vehicles_spec_2025.csv"),[Delimiter=",", Columns=22, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"brand", type text}, {"model", type text}, {"top_speed_kmh", Int64.Type}, {"battery_capacity_kWh", Int64.Type}, {"battery_type", type text}, {"number_of_cells", Int64.Type}, {"torque_nm", Int64.Type}, {"efficiency_wh_per_km", Int64.Type}, {"range_km", Int64.Type}, {"acceleration_0_100_s", Int64.Type}, {"fast_charging_power_kw_dc", Int64.Type}, {"fast_charge_port", type text}, {"towing_capacity_kg", Int64.Type}, {"cargo_volume_l", type text}, {"seats", Int64.Type}, {"drivetrain", type text}, {"segment", type text}, {"length_mm", Int64.Type}, {"width_mm", Int64.Type}, {"height_mm", Int64.Type}, {"car_body_type", type text}, {"source_url", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"model", "top_speed_kmh", "battery_capacity_kWh", "battery_type", "number_of_cells", "torque_nm", "efficiency_wh_per_km", "range_km", "acceleration_0_100_s", "fast_charging_power_kw_dc", "fast_charge_port", "towing_capacity_kg", "cargo_volume_l", "seats", "drivetrain", "segment", "length_mm", "width_mm", "height_mm", "car_body_type", "source_url"}),
+				    #"Doublons supprimés" = Table.Distinct(#"Colonnes supprimées", {"brand"}),
+				    #"Colonne conditionnelle ajoutée" = Table.AddColumn(#"Doublons supprimés", "Country", 
+				        each if [brand] = "Abarth" then "Italy" 
+				        else if [brand] = "Aiways" then "China" 
+				        else if [brand] = "Alfa" then "Italy" 
+				        else if [brand] = "Alpine" then "France"
+				        else if [brand] = "Audi" then "Germany" 
+				        else if [brand] = "BMW" then "Germany" 
+				        else if [brand] = "BYD" then "China" 
+				        else if [brand] = "CUPRA" then "Spain" 
+				        else if [brand] = "Cadillac" then "United-States" 
+				        else if [brand] = "Citroen" then "France"
+				        else if [brand] = "Dongfeng" then "China" 
+				        else if [brand] = "DS" then "France"
+				        else if [brand] = "Dacia" then "France"
+				        else if [brand] = "Elaris" then "Germany" 
+				        else if [brand] = "Fiat" then "Italy" 
+				        else if [brand] = "Ford" then "United-States" 
+				        else if [brand] = "GWM" then "China" 
+				        else if [brand] = "Genesis" then "South-Korea" 
+				        else if [brand] = "Honda" then "Japan" 
+				        else if [brand] = "Hongqi" then "China"
+				        else if [brand] = "Hyundai" then "South-Korea"
+				        else if [brand] = "Jaguar" then "United-Kingdom"
+				        else if [brand] = "Jeep" then "United-States"
+				        else if [brand] = "KGM" then "South-Korea"
+				        else if [brand] = "Kia" then "South-Korea"
+				        else if [brand] = "Lancia" then "Italy"
+				        else if [brand] = "Leapmotor" then "China"
+				        else if [brand] = "Lexus" then "Japan"
+				        else if [brand] = "Lotus" then "United-Kingdom"
+				        else if [brand] = "Lucid" then "United-States"
+				        else if [brand] = "Lynk&Co" then "China"
+				        else if [brand] = "MG" then "China"
+				        else if [brand] = "Maserati" then "Italy"
+				        else if [brand] = "Maxus" then "China"
+				        else if [brand] = "Mazda" then "Japan"
+				        else if [brand] = "Mercedes-Benz" then "Germany"
+				        else if [brand] = "Mini" then "United-Kingdom"
+				        else if [brand] = "NIO" then "China"
+				        else if [brand] = "Nissan" then "Japan"
+				        else if [brand] = "Omoda" then "China"
+				        else if [brand] = "Opel" then "Germany"
+				        else if [brand] = "Peugeot" then "France"
+				        else if [brand] = "Polestar" then "United-States"
+				        else if [brand] = "Porsche" then "Germany"
+				        else if [brand] = "Renault" then "France"
+				        else if [brand] = "Rolls-Royce" then "United-Kingdom"
+				        else if [brand] = "Skoda" then "Czech Republic"
+				        else if [brand] = "Skywell" then "China"
+				        else if [brand] = "Smart" then "Germany"
+				        else if [brand] = "Subaru" then "Japan"
+				        else if [brand] = "Tesla" then "United-States"
+				        else if [brand] = "Toyota" then "Japan"
+				        else if [brand] = "VinFast" then "Vietnam"
+				        else if [brand] = "Volkswagen" then "Germany"
+				        else if [brand] = "Volvo" then "Suede"
+				        else if [brand] = "Voyah" then "China"
+				        else if [brand] = "XPENG" then "China"
+				        else if [brand] = "Zeekr" then "China"
+				        else if [brand] = "firefly" then ""
+				        else "", type text),
+				            #"Index ajouté" = Table.AddIndexColumn(#"Colonne conditionnelle ajoutée", "Index", 1, 1, Int64.Type),
+				            #"Colonnes permutées" = Table.ReorderColumns(#"Index ajouté",{"Index", "brand", "Country"}),
+				            #"Colonnes renommées" = Table.RenameColumns(#"Colonnes permutées",{{"Index", "brand_id"}}),
+				            #"Lignes filtrées" = Table.SelectRows(#"Colonnes renommées", each ([brand] <> "firefly")),
+				            #"Texte inséré entre les délimiteurs" = Table.AddColumn(#"Lignes filtrées", "Group", 
+				        each if [brand] = "Abarth" then "Stellantis"
+				        else if [brand] = "Aiways" then "Aiways Group"
+				        else if [brand] = "Alfa" then "Stellantis"
+				        else if [brand] = "Alpine" then "Renault Group"
+				        else if [brand] = "Audi" then "Volkswagen Group"
+				        else if [brand] = "BMW" then "BMW Group"
+				        else if [brand] = "BYD" then "BYD Auto"
+				        else if [brand] = "CUPRA" then "Volkswagen Group"
+				        else if [brand] = "Cadillac" then "General Motors"
+				        else if [brand] = "Citroen" then "Stellantis"
+				        else if [brand] = "Dongfeng" then "Dongfeng Motor Corporation"
+				        else if [brand] = "DS" then "Stellantis"
+				        else if [brand] = "Dacia" then "Renault Group"
+				        else if [brand] = "Elaris" then "Elaris"
+				        else if [brand] = "Fiat" then "Stellantis"
+				        else if [brand] = "Ford" then "Ford Motor Company"
+				        else if [brand] = "GWM" then "Great Wall Motors"
+				        else if [brand] = "Genesis" then "Hyundai Motor Group"
+				        else if [brand] = "Honda" then "Honda Motor Co."
+				        else if [brand] = "Hongqi" then "FAW Group"
+				        else if [brand] = "Hyundai" then "Hyundai Motor Group"
+				        else if [brand] = "Jaguar" then "Tata Motors"
+				        else if [brand] = "Jeep" then "Stellantis"
+				        else if [brand] = "KGM" then "KG Mobility (ex-SsangYong)"
+				        else if [brand] = "Kia" then "Hyundai Motor Group"
+				        else if [brand] = "Lancia" then "Stellantis"
+				        else if [brand] = "Leapmotor" then "Leapmotor"
+				        else if [brand] = "Lexus" then "Toyota Motor Corporation"
+				        else if [brand] = "Lotus" then "Geely Group"
+				        else if [brand] = "Lucid" then "Lucid Group"
+				        else if [brand] = "Lynk&Co" then "Geely Group"
+				        else if [brand] = "MG" then "SAIC Motor"
+				        else if [brand] = "Maserati" then "Stellantis"
+				        else if [brand] = "Maxus" then "SAIC Motor"
+				        else if [brand] = "Mazda" then "Mazda Motor Corporation"
+				        else if [brand] = "Mercedes-Benz" then "Mercedes-Benz Group"
+				        else if [brand] = "Mini" then "BMW Group"
+				        else if [brand] = "NIO" then "NIO Inc."
+				        else if [brand] = "Nissan" then "Renault-Nissan-Mitsubishi"
+				        else if [brand] = "Omoda" then "Chery Automobile"
+				        else if [brand] = "Opel" then "Stellantis"
+				        else if [brand] = "Peugeot" then "Stellantis"
+				        else if [brand] = "Polestar" then "Geely Group"
+				        else if [brand] = "Porsche" then "Volkswagen Group"
+				        else if [brand] = "Renault" then "Renault Group"
+				        else if [brand] = "Rolls-Royce" then "BMW Group"
+				        else if [brand] = "Skoda" then "Volkswagen Group"
+				        else if [brand] = "Skywell" then "Skyworth Auto"
+				        else if [brand] = "Smart" then "Geely Group / Mercedes-Benz"
+				        else if [brand] = "Subaru" then "Subaru Corporation"
+				        else if [brand] = "Tesla" then "Tesla Inc."
+				        else if [brand] = "Toyota" then "Toyota Motor Corporation"
+				        else if [brand] = "VinFast" then "VinGroup"
+				        else if [brand] = "Volkswagen" then "Volkswagen Group"
+				        else if [brand] = "Volvo" then "Geely Group"
+				        else if [brand] = "Voyah" then "Dongfeng Motor Corporation"
+				        else if [brand] = "XPENG" then "Xpeng Motors"
+				        else if [brand] = "Zeekr" then "Geely Group"
+				        else if [brand] = "firefly" then ""
+				        else "", type text),
+				            #"Colonne conditionnelle ajoutée1" = Table.AddColumn(#"Texte inséré entre les délimiteurs", "Logo", 
+				        each if [brand] = "Abarth" then "https://upload.wikimedia.org/wikipedia/fr/thumb/6/6b/Abarth_2007_Logo.svg/1200px-Abarth_2007_Logo.svg.png"
+				        else if [brand] = "Aiways" then "https://upload.wikimedia.org/wikipedia/commons/a/a5/Aiways_Logo_01.2021.svg"
+				        else if [brand] = "Alfa" then "https://upload.wikimedia.org/wikipedia/fr/thumb/1/16/Logo_Alfa_Romeo_%282015%29.svg/1200px-Logo_Alfa_Romeo_%282015%29.svg.png"
+				        else if [brand] = "Alpine" then "https://upload.wikimedia.org/wikipedia/fr/1/1f/Alpine.svg"
+				        else if [brand] = "Audi" then "https://upload.wikimedia.org/wikipedia/fr/thumb/1/15/Audi_logo.svg/2560px-Audi_logo.svg.png"
+				        else if [brand] = "BMW" then "https://upload.wikimedia.org/wikipedia/commons/f/f4/BMW_logo_%28gray%29.svg"
+				        else if [brand] = "BYD" then "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/BYD_Auto_2022_logo.svg/langfr-1920px-BYD_Auto_2022_logo.svg.png"
+				        else if [brand] = "CUPRA" then "https://upload.wikimedia.org/wikipedia/commons/7/70/Cupra.svg"
+				        else if [brand] = "Cadillac" then "https://upload.wikimedia.org/wikipedia/fr/thumb/3/33/Cadillac.svg/langfr-250px-Cadillac.svg.png"
+				        else if [brand] = "Citroen" then "https://upload.wikimedia.org/wikipedia/fr/thumb/e/e9/Citroen_logo.svg/2560px-Citroen_logo.svg.png"
+				        else if [brand] = "Dongfeng" then "https://upload.wikimedia.org/wikipedia/fr/9/9e/Dongfeng-logo.png"
+				        else if [brand] = "DS" then "https://upload.wikimedia.org/wikipedia/fr/4/44/DS_Automobiles_Logo.svg"
+				        else if [brand] = "Dacia" then "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Dacia-Logo-2021.svg/1200px-Dacia-Logo-2021.svg.png"
+				        else if [brand] = "Elaris" then ""
+				        else if [brand] = "Fiat" then "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKezcYLqS7jew1L9SD5LiijTfWy8CWZ00Cw&s"
+				        else if [brand] = "Ford" then "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ford_Motor_Company_Logo.svg/1200px-Ford_Motor_Company_Logo.svg.png"
+				        else if [brand] = "GWM" then "https://upload.wikimedia.org/wikipedia/commons/e/e6/Great_Wall_Motor_2025_logo.png"
+				        else if [brand] = "Genesis" then "https://upload.wikimedia.org/wikipedia/en/archive/8/83/20240822194008%21Genesis_division_emblem.svg"
+				        else if [brand] = "Honda" then "https://upload.wikimedia.org/wikipedia/commons/3/38/Honda.svg"
+				        else if [brand] = "Hongqi" then "https://upload.wikimedia.org/wikipedia/de/5/57/Hong_Qi-Logo.JPG"
+				        else if [brand] = "Hyundai" then "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hyundai_Motor_Company_logo.svg/2560px-Hyundai_Motor_Company_logo.svg.png"
+				        else if [brand] = "Jaguar" then "https://upload.wikimedia.org/wikipedia/fr/4/42/Jaguar-logo-2012-1920x1080.png"
+				        else if [brand] = "Jeep" then "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH3zC--LuDPvyWTVB4c7d7CLmBQAEQcDuRfQ&s"
+				        else if [brand] = "KGM" then "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/KG_Mobility_brand_logo.svg/2560px-KG_Mobility_brand_logo.svg.png"
+				        else if [brand] = "Kia" then "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/KIA_logo2.svg/2560px-KIA_logo2.svg.png"
+				        else if [brand] = "Lancia" then "https://upload.wikimedia.org/wikipedia/fr/thumb/3/3f/Lancia_2022_%28logo%29.png/1200px-Lancia_2022_%28logo%29.png"
+				        else if [brand] = "Leapmotor" then "https://upload.wikimedia.org/wikipedia/commons/a/af/Leapmotor_logo.png"
+				        else if [brand] = "Lexus" then "https://upload.wikimedia.org/wikipedia/en/thumb/d/d1/Lexus_division_emblem.svg/2560px-Lexus_division_emblem.svg.png"
+				        else if [brand] = "Lotus" then "https://upload.wikimedia.org/wikipedia/fr/thumb/d/d4/Lotus_Cars_-_Logo.svg/2048px-Lotus_Cars_-_Logo.svg.png"
+				        else if [brand] = "Lucid" then "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Lucid_Motors_logo.svg/2560px-Lucid_Motors_logo.svg.png"
+				        else if [brand] = "Lynk&Co" then "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Lynk_%26_Co_2016_logo.svg/2560px-Lynk_%26_Co_2016_logo.svg.png"
+				        else if [brand] = "MG" then "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Mg_logo.svg/2123px-Mg_logo.svg.png"
+				        else if [brand] = "Maserati" then "https://upload.wikimedia.org/wikipedia/fr/8/84/Maserati_2020_Logo.svg"
+				        else if [brand] = "Maxus" then "https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Maxus_Motor_%28Thailand%29_.co.%2Cltd.png"
+				        else if [brand] = "Mazda" then "https://upload.wikimedia.org/wikipedia/fr/thumb/d/de/Mazda.svg/1200px-Mazda.svg.png"
+				        else if [brand] = "Mercedes-Benz" then "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Mercedes-Benz_Logo_2010.svg/1280px-Mercedes-Benz_Logo_2010.svg.png"
+				        else if [brand] = "Mini" then "https://upload.wikimedia.org/wikipedia/fr/b/bb/Logo_Mini.jpg"
+				        else if [brand] = "NIO" then "https://upload.wikimedia.org/wikipedia/commons/c/ca/NIO_logo.svg"
+				        else if [brand] = "Nissan" then "https://upload.wikimedia.org/wikipedia/commons/2/23/Nissan_2020_logo.svg"
+				        else if [brand] = "Omoda" then "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFile%3AOmoda_wordmark.svg&psig=AOvVaw0UN4Tu-Yz5R3EMo_jUbNPe&ust=1752567405659000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMC2lr_0u44DFQAAAAAdAAAAABAE"
+				        else if [brand] = "Opel" then "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkCrth_pANOC35C0mf5iLblkuvP1FeMxqqxA&s"
+				        else if [brand] = "Peugeot" then "https://upload.wikimedia.org/wikipedia/fr/thumb/9/9d/Peugeot_2021_Logo.svg/langfr-250px-Peugeot_2021_Logo.svg.png"
+				        else if [brand] = "Polestar" then "https://upload.wikimedia.org/wikipedia/commons/4/42/Polestar_Logo.png"
+				        else if [brand] = "Porsche" then "https://upload.wikimedia.org/wikipedia/fr/thumb/e/e7/Logo_Porsche.svg/1200px-Logo_Porsche.svg.png"
+				        else if [brand] = "Renault" then "https://upload.wikimedia.org/wikipedia/commons/b/b7/Renault_2021_Text.svg"
+				        else if [brand] = "Rolls-Royce" then "https://upload.wikimedia.org/wikipedia/fr/3/34/Rolls-royce_logo.png"
+				        else if [brand] = "Skoda" then "https://upload.wikimedia.org/wikipedia/commons/0/09/%C5%A0koda_nieuw.png"
+				        else if [brand] = "Skywell" then "https://upload.wikimedia.org/wikipedia/ru/8/8a/Skywell_logo.png"
+				        else if [brand] = "Smart" then "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Smart.svg/2560px-Smart.svg.png"
+				        else if [brand] = "Subaru" then "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Subaru_%282019%29.svg/1200px-Subaru_%282019%29.svg.png"
+				        else if [brand] = "Tesla" then "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Tesla_logo.png/1200px-Tesla_logo.png"
+				        else if [brand] = "Toyota" then "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6b2FkwYqSTo9hbYh2_B9zsKDHe3fryAuSCQ&s"
+				        else if [brand] = "VinFast" then "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/VinFast_logo_%28simple_variant%29.svg/1200px-VinFast_logo_%28simple_variant%29.svg.png"
+				        else if [brand] = "Volkswagen" then "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHc09dCaSjCu0x098DETJcO4_NhEcUSeVbXQ&s"
+				        else if [brand] = "Volvo" then "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeOYMZSDhz39dpbAFO_D1BdzJVfCI2F2iy9Q&s"
+				        else if [brand] = "Voyah" then "https://upload.wikimedia.org/wikipedia/en/9/9e/Voyah_Logo.png"
+				        else if [brand] = "XPENG" then "https://upload.wikimedia.org/wikipedia/commons/b/b2/XPeng_logo.png"
+				        else if [brand] = "Zeekr" then "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Zeekr_logo.svg/2560px-Zeekr_logo.svg.png"
+				        else if [brand] = "firefly" then ""
+				        else "", type text),
+				    #"Colonne conditionnelle ajoutée2" = Table.AddColumn(#"Colonne conditionnelle ajoutée1", "Flag",
+				    each if [Country] = "China" then "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/langfr-250px-Flag_of_the_People%27s_Republic_of_China.svg.png" 
+				    else if [Country] = "Italy" then "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Italy_%282003%E2%80%932006%29.svg/250px-Flag_of_Italy_%282003%E2%80%932006%29.svg.png" 
+				    else if [Country] = "France" then "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/langfr-250px-Flag_of_France.svg.png" 
+				    else if [Country] = "United-Kingdom" then "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/langfr-250px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" 
+				    else if [Country] = "United-States" then "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flag_of_the_United_States_%28Pantone%29.svg/250px-Flag_of_the_United_States_%28Pantone%29.svg.png" 
+				    else if [Country] = "Suede" then "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Sweden.svg/960px-Flag_of_Sweden.svg.png" 
+				    else if [Country] = "Japan" then "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/langfr-250px-Flag_of_Japan.svg.png" 
+				    else if [Country] = "Czech Republic" then "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/langfr-250px-Flag_of_the_Czech_Republic.svg.png" 
+				    else if [Country] = "Vietnam" then "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png" 
+				    else if [Country] = "South-Korea" then "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/langfr-250px-Flag_of_South_Korea.svg.png" 
+				    else if [Country] = "Germany" then "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Germany_%283-2%29.svg/250px-Flag_of_Germany_%283-2%29.svg.png"
+				    else if [Country] = "Spain" then "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/langfr-250px-Flag_of_Spain.svg.png"
+				    else null, type text)
+				        in
+				            #"Colonne conditionnelle ajoutée2"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

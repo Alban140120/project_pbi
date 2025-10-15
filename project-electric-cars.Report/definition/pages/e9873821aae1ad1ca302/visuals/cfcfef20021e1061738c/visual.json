@@ -1,0 +1,327 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "cfcfef20021e1061738c",
+  "position": {
+    "x": 328.88405008165489,
+    "y": 108.69896570495374,
+    "z": 5000,
+    "height": 610.38649972781718,
+    "width": 942.05770277626573,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "pythonVisual",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_MODEL"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "DIM_MODEL.model",
+              "nativeQueryRef": "model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "acceleration_0_100_sec"
+                }
+              },
+              "queryRef": "FACT_TABLE.acceleration_0_100_sec",
+              "nativeQueryRef": "acceleration_0_100_sec"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "battery_capacity_kWh"
+                }
+              },
+              "queryRef": "FACT_TABLE.battery_capacity_kWh",
+              "nativeQueryRef": "battery_capacity_kWh"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "cargo_volume_l"
+                }
+              },
+              "queryRef": "FACT_TABLE.cargo_volume_l",
+              "nativeQueryRef": "cargo_volume_l"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "efficiency_wh_per_km"
+                }
+              },
+              "queryRef": "FACT_TABLE.efficiency_wh_per_km",
+              "nativeQueryRef": "efficiency_wh_per_km"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "fast_charging_power_kw_dc"
+                }
+              },
+              "queryRef": "FACT_TABLE.fast_charging_power_kw_dc",
+              "nativeQueryRef": "fast_charging_power_kw_dc"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "height_mm"
+                }
+              },
+              "queryRef": "FACT_TABLE.height_mm",
+              "nativeQueryRef": "height_mm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "length_mm"
+                }
+              },
+              "queryRef": "FACT_TABLE.length_mm",
+              "nativeQueryRef": "length_mm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "number_of_cells"
+                }
+              },
+              "queryRef": "FACT_TABLE.number_of_cells",
+              "nativeQueryRef": "number_of_cells"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "range_km"
+                }
+              },
+              "queryRef": "FACT_TABLE.range_km",
+              "nativeQueryRef": "range_km"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "seats"
+                }
+              },
+              "queryRef": "FACT_TABLE.seats",
+              "nativeQueryRef": "seats"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "top_speed_kmh"
+                }
+              },
+              "queryRef": "FACT_TABLE.top_speed_kmh",
+              "nativeQueryRef": "top_speed_kmh"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "torque_nm"
+                }
+              },
+              "queryRef": "FACT_TABLE.torque_nm",
+              "nativeQueryRef": "torque_nm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "towing_capacity_kg"
+                }
+              },
+              "queryRef": "FACT_TABLE.towing_capacity_kg",
+              "nativeQueryRef": "towing_capacity_kg"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_TABLE"
+                    }
+                  },
+                  "Property": "width_mm"
+                }
+              },
+              "queryRef": "FACT_TABLE.width_mm",
+              "nativeQueryRef": "width_mm"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "script": [
+        {
+          "properties": {
+            "source": {
+              "expr": {
+                "Literal": {
+                  "Value": "'import pandas as pd\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.decomposition import PCA\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom adjustText import adjust_text\n\n# Récupérer les données depuis Power BI\ndf = dataset.copy()\n\n# Supprimer les lignes avec valeurs manquantes\ndf = df.dropna()\n\n# Sélection des variables numériques\nfeatures = [\n    ''acceleration_0_100_sec'',\n    ''battery_capacity_kWh'',\n    ''cargo_volume_l'',\n    ''efficiency_wh_per_km'',\n    ''fast_charging_power_kw_dc'',\n    ''height_mm'',\n    ''length_mm'',\n    ''number_of_cells'',\n    ''range_km'',\n    ''seats'',\n    ''top_speed_kmh'',\n    ''torque_nm'',\n    ''towing_capacity_kg'',\n    ''width_mm''\n]\n\nX = df[features]\nmodels = df[''model'']\n\n# Standardisation des variables\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# PCA (2 composantes principales)\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X_scaled)\n\n# Clustering\nkmeans = KMeans(n_clusters=3, random_state=42)\nclusters = kmeans.fit_predict(X_scaled)\n\n# Visualisation\nplt.figure(figsize=(12, 8))\nsns.scatterplot(x=X_pca[:, 0], y=X_pca[:, 1], hue=clusters, palette=''Set2'', s=100)\n\n# Ajouter les noms des modèles sans chevauchement\ntexts = []\nfor i, label in enumerate(models):\n    texts.append(plt.text(X_pca[i, 0], X_pca[i, 1], label, fontsize=8))\n\nadjust_text(texts, arrowprops=dict(arrowstyle=''-'', color=''gray'', lw=0.5))\n\nplt.xlabel(f''PC1 ({pca.explained_variance_ratio_[0]:.1%} variance)'')\nplt.ylabel(f''PC2 ({pca.explained_variance_ratio_[1]:.1%} variance)'')\nplt.grid(True)\nplt.tight_layout()\nplt.show()'"
+                }
+              }
+            },
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Python'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'PCA + Clustering of brand''s models'"
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.3
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.3
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

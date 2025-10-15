@@ -1,0 +1,39 @@
+table DIM_BODY_TYPE
+	lineageTag: c1edaac7-514a-4483-bb04-17777e0efeec
+
+	column body_type_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 15c23ef4-f50b-4aee-86b3-7fd9e7f18151
+		summarizeBy: none
+		sourceColumn: body_type_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column car_body_type
+		dataType: string
+		lineageTag: 82a97f8d-9d80-44de-a778-b94897b4cdae
+		summarizeBy: none
+		sourceColumn: car_body_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_BODY_TYPE = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\alban.daniel_amaris\Documents\projet_perso\electric_vehicles_spec_2025.csv"),[Delimiter=",", Columns=22, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"brand", type text}, {"model", type text}, {"top_speed_kmh", Int64.Type}, {"battery_capacity_kWh", Int64.Type}, {"battery_type", type text}, {"number_of_cells", Int64.Type}, {"torque_nm", Int64.Type}, {"efficiency_wh_per_km", Int64.Type}, {"range_km", Int64.Type}, {"acceleration_0_100_s", Int64.Type}, {"fast_charging_power_kw_dc", Int64.Type}, {"fast_charge_port", type text}, {"towing_capacity_kg", Int64.Type}, {"cargo_volume_l", type text}, {"seats", Int64.Type}, {"drivetrain", type text}, {"segment", type text}, {"length_mm", Int64.Type}, {"width_mm", Int64.Type}, {"height_mm", Int64.Type}, {"car_body_type", type text}, {"source_url", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"brand", "model", "top_speed_kmh", "battery_capacity_kWh", "battery_type", "number_of_cells", "torque_nm", "efficiency_wh_per_km", "range_km", "acceleration_0_100_s", "fast_charging_power_kw_dc", "fast_charge_port", "towing_capacity_kg", "cargo_volume_l", "seats", "drivetrain", "segment", "length_mm", "width_mm", "height_mm", "source_url"}),
+				    #"Doublons supprimés" = Table.Distinct(#"Colonnes supprimées"),
+				    #"Index ajouté" = Table.AddIndexColumn(#"Doublons supprimés", "Index", 1, 1, Int64.Type),
+				    #"Colonnes permutées" = Table.ReorderColumns(#"Index ajouté",{"Index", "car_body_type"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes permutées",{{"Index", "body_type_id"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

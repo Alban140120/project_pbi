@@ -1,0 +1,26 @@
+model Model
+	culture: fr-BE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-BE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["FACT_TABLE","DIM_BRAND","DIM_MODEL","DIM_BODY_TYPE","DIM_DRIVE_TRAIN","electric_vehicles_spec_2025","Measure"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table electric_vehicles_spec_2025
+ref table DIM_BRAND
+ref table DIM_MODEL
+ref table FACT_TABLE
+ref table DIM_BODY_TYPE
+ref table DIM_DRIVE_TRAIN
+ref table Measure
+ref table ParameterSlicer
+ref table ParameterSlicerY
+
+ref cultureInfo fr-BE
+

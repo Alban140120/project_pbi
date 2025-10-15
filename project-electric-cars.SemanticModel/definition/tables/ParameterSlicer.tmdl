@@ -1,0 +1,37 @@
+table ParameterSlicer
+	lineageTag: 797fb2c8-b9c0-4b49-9507-e9c23d20e3b2
+
+	column Slicer
+		lineageTag: f6933b31-dc97-43ec-946a-2c7609fe6628
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Slicer]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ParameterSlicer = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Slicer", STRING,
+				    {
+				        {"Average Acceleration 0 to 100 sec"},
+				        {"Average Battery Capacity (kWh)"},
+				        {"Average Cargo Volume (L)"},
+				        {"Average Efficiency (wh per km)"},
+				        {"Average Fast Charging Power (kw dc)"},
+				        {"Average Height (mm)"},
+				        {"Average Lenght (mm)"},
+				        {"Average Number of cells"},
+				        {"Average Range (kms)"},
+				        {"Average Seats"},
+				        {"Average Top Speed (km/h)"},
+				        {"Average Torque (nm)"},
+				        {"Average Towing Capacity (kg)"},
+				        {"Average Width (mm)"}
+				    }
+				)
+
+	annotation PBI_Id = 49551fc7084e4f27af5313480e5198e8
+

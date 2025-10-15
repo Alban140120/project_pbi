@@ -1,0 +1,139 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 917.42653733630448,
+            "y": 0
+          },
+          "nodeIndex": "electric_vehicles_spec_2025",
+          "nodeLineageTag": "e648553c-a59a-4760-9dfc-ca0fa644cba2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 603.6943166478618,
+            "y": 533.698779296908
+          },
+          "nodeIndex": "DIM_BRAND",
+          "nodeLineageTag": "2cdfea18-72a5-410b-9fa7-6f3f00f1792b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": -50
+          },
+          "nodeIndex": "DIM_MODEL",
+          "nodeLineageTag": "21759141-f161-466a-90e8-6dbcd947d413",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 334.1804598826551,
+            "y": 183.53011208355997
+          },
+          "nodeIndex": "FACT_TABLE",
+          "nodeLineageTag": "9444b384-6e62-4d5f-b961-efeaa7aa0fba",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 56.772385677765669,
+            "y": 533.677665249875
+          },
+          "nodeIndex": "DIM_BODY_TYPE",
+          "nodeLineageTag": "c1edaac7-514a-4483-bb04-17777e0efeec",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 565.11097078845387,
+            "y": 5.35759376658325
+          },
+          "nodeIndex": "DIM_DRIVE_TRAIN",
+          "nodeLineageTag": "80a204d0-13bf-403b-a321-4d6cab929094",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1163.054152853369,
+            "y": 1.5146499978026213
+          },
+          "nodeIndex": "Measure",
+          "nodeLineageTag": "17c4e4ab-e9ce-4c42-aeff-04836369012f",
+          "size": {
+            "height": 410.77406896147608,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 931.94950682459557,
+            "y": 526.06278792075489
+          },
+          "nodeIndex": "ParameterSlicer",
+          "nodeLineageTag": "797fb2c8-b9c0-4b49-9507-e9c23d20e3b2",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1197.723601132262,
+            "y": 522.74061205873636
+          },
+          "nodeIndex": "ParameterSlicerY",
+          "nodeLineageTag": "be0f9df7-ebea-49cb-b753-35017763de41",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 60.201508982876717,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

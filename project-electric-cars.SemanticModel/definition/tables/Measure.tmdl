@@ -1,0 +1,208 @@
+table Measure
+	lineageTag: 17c4e4ab-e9ce-4c42-aeff-04836369012f
+
+	measure TitlePage1&2 =
+			
+			VAR brand = VALUES(DIM_BRAND[brand])
+			
+			RETURN
+			"Inside " & brand & "'s models"
+		displayFolder: Title
+		lineageTag: dc282ef2-6120-4a2f-8855-00abd8981a14
+
+	measure 'Selected Average Measure' =
+			
+			VAR Selection = SELECTEDVALUE(ParameterSlicer[Slicer])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Selection = "Average Acceleration 0 to 100 sec", AVERAGE(FACT_TABLE[acceleration_0_100_sec]),
+			        Selection = "Average Battery Capacity (kwh)", AVERAGE(FACT_TABLE[battery_capacity_kWh]),
+			        Selection = "Average Cargo Volume (L)", AVERAGE(FACT_TABLE[cargo_volume_l]),
+			        Selection = "Average Efficiency (wh per km)", AVERAGE(FACT_TABLE[efficiency_wh_per_km]),
+			        Selection = "Average Fast Charging Power (kw dc)", AVERAGE(FACT_TABLE[fast_charging_power_kw_dc]),
+			        Selection = "Average Height (mm)", AVERAGE(FACT_TABLE[height_mm]),
+			        Selection = "Average Lenght (mm)", AVERAGE(FACT_TABLE[length_mm]),
+			        Selection = "Average Number of cells", AVERAGE(FACT_TABLE[number_of_cells]),
+			        Selection = "Average Range (kms)", AVERAGE(FACT_TABLE[range_km]),
+			        Selection = "Average Seats", AVERAGE(FACT_TABLE[seats]),
+			        Selection = "Average Top Speed (km/h)", AVERAGE(FACT_TABLE[top_speed_kmh]),
+			        Selection = "Average Torque (nm)", AVERAGE(FACT_TABLE[torque_nm]),
+			        Selection = "Average Towing Capacity (kg)", AVERAGE(FACT_TABLE[towing_capacity_kg]),
+			        Selection = "Average Width (mm)", AVERAGE(FACT_TABLE[width_mm]),
+			        BLANK()
+			    )
+		formatString: #,0.00
+		displayFolder: Summary
+		lineageTag: 3f6d4c76-cc0c-429c-8e22-1730cc11830c
+
+	measure TitlePage3 =
+			
+			VAR SelectedValues =
+			    CONCATENATEX(
+			        DISTINCT(DIM_BRAND[Country]),
+			        DIM_BRAND[Country],
+			        ", "
+			    )
+			VAR SelectedCount =
+			    COUNTROWS( DISTINCT(DIM_BRAND[Country]) )
+			VAR AllCount =
+			    CALCULATE(
+			        COUNTROWS( DISTINCT(DIM_BRAND[Country]) ),
+			        ALL(DIM_BRAND)
+			    )
+			RETURN
+			    IF(
+			        SelectedCount = 0,
+			        "Inside Country's engineering excellence",   // aucun filtre
+			        IF(
+			            SelectedCount = AllCount,
+			            "Inside All countries' engineering excellence",  // tous les pays
+			            "Inside " & SelectedValues & "'s engineering excellence"  // sélection multiple/pays unique
+			        )
+			    )
+		displayFolder: Title
+		lineageTag: 3c35eb94-a652-4051-a184-301f6f9fda9b
+
+	measure TopBottomDecileByModel =
+			
+			VAR CurModel = [CurBrandAvg]
+			VAR Low = [DecileLow]
+			VAR High = [DecileHigh]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        CurModel >= High && CurModel > 0, 1,
+			        CurModel <= Low && CurModel > 0, 2,
+			        0
+			    )
+		formatString: 0
+		displayFolder: Summary
+		lineageTag: 1948a0a3-a252-4e12-a338-e040949796f6
+
+	measure CurBrandAvg =
+			
+			CALCULATE(
+			  [Selected Average Measure],
+			  ALLEXCEPT(DIM_BRAND, DIM_BRAND[brand], DIM_BRAND[Country])
+			)
+		displayFolder: Summary
+		lineageTag: f7dde38c-1976-4752-a480-9697e244fc8a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DecileHigh =
+			
+			VAR AllBrands = ALL(DIM_BRAND[brand], DIM_BRAND[Country])
+			RETURN
+			  PERCENTILEX.INC(
+			    AllBrands,
+			    [Selected Average Measure],
+			    0.75
+			  )
+		displayFolder: Decile
+		lineageTag: 1b292c21-37ce-4df0-96d7-ff236283edc5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DecileLow =
+			
+			VAR AllBrands = ALL(DIM_BRAND[brand], DIM_BRAND[Country])
+			RETURN
+			  PERCENTILEX.INC(
+			    AllBrands,
+			    [Selected Average Measure],
+			    0.25
+			  )
+		displayFolder: Decile
+		lineageTag: 5399439c-469b-4cbf-85f8-8cf8a4fc6fd9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TitlePage5 =
+			
+			VAR kpi_ = VALUES(ParameterSlicer[Slicer])
+			
+			RETURN
+			"Inside " & kpi_ & "'s brand"
+		displayFolder: Title
+		lineageTag: 7a0a7487-d4bc-4adc-8f74-83d6aa055d9b
+
+	measure CurAvg =
+			
+			CALCULATE(
+			  [Selected Average Measure],
+			  ALL(DIM_BRAND)
+			)
+		displayFolder: Summary
+		lineageTag: 0bcac255-4c42-4ce5-aa3b-a8bb18645418
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TopKPIMean =
+			
+			VAR Mean = [CurAvg]
+			VAR Value_ = [Selected Average Measure]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Mean >= Value_ && Value_ > 0, 1,
+			        Mean <= Value_ && Value_ > 0, 0,
+			        0
+			    )
+		formatString: 0
+		displayFolder: Summary
+		lineageTag: 7fdb66a3-e885-421b-bb5d-98e1bd7617e1
+
+	measure 'Selected Average Measure Y' =
+			
+			VAR Selection = SELECTEDVALUE(ParameterSlicerY[Slicer])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Selection = "Average Acceleration 0 to 100 sec", AVERAGE(FACT_TABLE[acceleration_0_100_sec]),
+			        Selection = "Average Battery Capacity (kwh)", AVERAGE(FACT_TABLE[battery_capacity_kWh]),
+			        Selection = "Average Cargo Volume (L)", AVERAGE(FACT_TABLE[cargo_volume_l]),
+			        Selection = "Average Efficiency (wh per km)", AVERAGE(FACT_TABLE[efficiency_wh_per_km]),
+			        Selection = "Average Fast Charging Power (kw dc)", AVERAGE(FACT_TABLE[fast_charging_power_kw_dc]),
+			        Selection = "Average Height (mm)", AVERAGE(FACT_TABLE[height_mm]),
+			        Selection = "Average Lenght (mm)", AVERAGE(FACT_TABLE[length_mm]),
+			        Selection = "Average Number of cells", AVERAGE(FACT_TABLE[number_of_cells]),
+			        Selection = "Average Range (kms)", AVERAGE(FACT_TABLE[range_km]),
+			        Selection = "Average Seats", AVERAGE(FACT_TABLE[seats]),
+			        Selection = "Average Top Speed (km/h)", AVERAGE(FACT_TABLE[top_speed_kmh]),
+			        Selection = "Average Torque (nm)", AVERAGE(FACT_TABLE[torque_nm]),
+			        Selection = "Average Towing Capacity (kg)", AVERAGE(FACT_TABLE[towing_capacity_kg]),
+			        Selection = "Average Width (mm)", AVERAGE(FACT_TABLE[width_mm]),
+			        BLANK()
+			    )
+		displayFolder: Summary
+		lineageTag: 2ed67d28-ca79-4fea-bc61-96e089be7a79
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TitlePage4 =
+			
+			VAR brand = VALUES(DIM_BRAND[brand])
+			VAR KPI_X = VALUES(ParameterSlicer[Slicer])
+			VAR KPI_Y = VALUES(ParameterSlicerY[Slicer])
+			
+			RETURN
+			"Versus between " & KPI_X & " and " & KPI_Y & " for " & brand & "'s models"
+		displayFolder: Title
+		lineageTag: 49ba1acd-ad5f-4943-bf44-bdf7b05feb7a
+
+	partition Measure = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Colonne 1" = _t]),
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"Colonne 1", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"Colonne 1"})
+				in
+				    #"Colonnes supprimées"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

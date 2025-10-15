@@ -1,0 +1,274 @@
+table electric_vehicles_spec_2025
+	isHidden
+	lineageTag: e648553c-a59a-4760-9dfc-ca0fa644cba2
+
+	column brand
+		dataType: string
+		isHidden
+		lineageTag: 2130490c-9998-4343-9ab8-38f078619e51
+		summarizeBy: none
+		sourceColumn: brand
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		isHidden
+		lineageTag: d998a428-0167-496f-a995-10ffc9827865
+		summarizeBy: none
+		sourceColumn: model
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column top_speed_kmh
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ca1d503f-ef43-43fe-9976-b1af94d6b39b
+		summarizeBy: sum
+		sourceColumn: top_speed_kmh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column battery_capacity_kWh
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a8dd3d9e-032e-4029-9fbf-e3f6107c8f12
+		summarizeBy: sum
+		sourceColumn: battery_capacity_kWh
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column battery_type
+		dataType: string
+		isHidden
+		lineageTag: 87059d01-efcf-4258-ba5e-70a6e37adfbe
+		summarizeBy: none
+		sourceColumn: battery_type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column number_of_cells
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c43ab582-28b7-48ce-aa51-08a7ca626a44
+		summarizeBy: sum
+		sourceColumn: number_of_cells
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column torque_nm
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 428def61-ca7d-4e68-8867-9280f7fcabb1
+		summarizeBy: sum
+		sourceColumn: torque_nm
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column efficiency_wh_per_km
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 913f86d5-4750-4e5b-b7f2-b1ad9cd9c754
+		summarizeBy: sum
+		sourceColumn: efficiency_wh_per_km
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column range_km
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dcce42e2-dbdd-4ea1-810b-6bb609fadf6f
+		summarizeBy: sum
+		sourceColumn: range_km
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceleration_0_100_s
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 02d29d02-03e9-4b46-99dd-ef08f1b3356e
+		summarizeBy: sum
+		sourceColumn: acceleration_0_100_s
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column fast_charging_power_kw_dc
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 43cf61e5-cc28-40e0-b94f-08738f0164ae
+		summarizeBy: sum
+		sourceColumn: fast_charging_power_kw_dc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column fast_charge_port
+		dataType: string
+		isHidden
+		lineageTag: efb51dba-33fe-49d4-b6bf-df891797ba29
+		summarizeBy: none
+		sourceColumn: fast_charge_port
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column towing_capacity_kg
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ddad163c-fe48-4dfa-af7f-a8976090059b
+		summarizeBy: sum
+		sourceColumn: towing_capacity_kg
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cargo_volume_l
+		dataType: string
+		isHidden
+		lineageTag: d6eae0ca-7274-4b1e-82fb-cd8973adbd6c
+		summarizeBy: none
+		sourceColumn: cargo_volume_l
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column seats
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 74574678-3743-44aa-b352-f8c49503be0c
+		summarizeBy: sum
+		sourceColumn: seats
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column drivetrain
+		dataType: string
+		isHidden
+		lineageTag: b0945ffd-3f88-47fd-91f6-65e0dd62ec8e
+		summarizeBy: none
+		sourceColumn: drivetrain
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment
+		dataType: string
+		isHidden
+		lineageTag: 00415b02-468d-4121-bd00-f3e96e10d324
+		summarizeBy: none
+		sourceColumn: segment
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column length_mm
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 622520cf-909b-4404-9784-8fc396c28be9
+		summarizeBy: sum
+		sourceColumn: length_mm
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column width_mm
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 17703b1d-b05d-4d48-aba3-eea71371b009
+		summarizeBy: sum
+		sourceColumn: width_mm
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column height_mm
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0b0c1f21-d715-4891-b2b1-b74a06fcffe7
+		summarizeBy: sum
+		sourceColumn: height_mm
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column car_body_type
+		dataType: string
+		isHidden
+		lineageTag: e1f2f15a-36fe-4ba5-9706-832f35e8abf2
+		summarizeBy: none
+		sourceColumn: car_body_type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_url
+		dataType: string
+		isHidden
+		lineageTag: 664a16fc-3714-4345-bcaa-48850bf543e8
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: source_url
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition electric_vehicles_spec_2025 = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\alban.daniel_amaris\Documents\projet_perso\electric_vehicles_spec_2025.csv"),[Delimiter=",", Columns=22, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"brand", type text}, {"model", type text}, {"top_speed_kmh", Int64.Type}, {"battery_capacity_kWh", Int64.Type}, {"battery_type", type text}, {"number_of_cells", Int64.Type}, {"torque_nm", Int64.Type}, {"efficiency_wh_per_km", Int64.Type}, {"range_km", Int64.Type}, {"acceleration_0_100_s", Int64.Type}, {"fast_charging_power_kw_dc", Int64.Type}, {"fast_charge_port", type text}, {"towing_capacity_kg", Int64.Type}, {"cargo_volume_l", type text}, {"seats", Int64.Type}, {"drivetrain", type text}, {"segment", type text}, {"length_mm", Int64.Type}, {"width_mm", Int64.Type}, {"height_mm", Int64.Type}, {"car_body_type", type text}, {"source_url", type text}})
+				in
+				    #"Type modifié"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

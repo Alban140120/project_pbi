@@ -1,0 +1,17 @@
+# --- Power BI Projects (.pbip) ---
+*.pbix
+*.abf
+*.tmp
+*.cache
+
+# Node / Logs / Temp
+node_modules/
+*.log
+
+# Windows system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Git internals
+.git/

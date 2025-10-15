@@ -1,0 +1,16 @@
+relationship e756a79c-3bbe-042e-2d7f-b76a0d61f6ce
+	fromColumn: FACT_TABLE.body_type_id
+	toColumn: DIM_BODY_TYPE.body_type_id
+
+relationship 2bce3496-095b-daff-067e-01e88a079f1b
+	fromColumn: FACT_TABLE.brand_id
+	toColumn: DIM_BRAND.brand_id
+
+relationship 6ba9b3e7-4811-69e0-8e16-bdc7b28893b5
+	fromColumn: FACT_TABLE.id_drive_train
+	toColumn: DIM_DRIVE_TRAIN.id_drive_train
+
+relationship 3ebcb3f9-2179-3c1a-5e2c-e136ea3565c4
+	fromColumn: FACT_TABLE.model_id
+	toColumn: DIM_MODEL.model_id
+
